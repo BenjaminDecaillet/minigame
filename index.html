@@ -4,17 +4,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Benjamin Quest</title>
+    <title>Matthew's Gift</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&family=Bebas+Neue&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg: #0f172a;
             --card: #1e313b;
-            --accent: #f5ed0b;
+            --accent: #f59e0b;
             --text: #f1f5f9;
-            --canard: #fbbf24;
-            --papa: #60a5fa;
-            --amis: #a771f8;
+            --wood: #92400e;
+            --bug: #22c55e;
+            --hammer: #dc2626;
         }
 
         body {
@@ -236,6 +236,7 @@
 <body>
 
     <audio id="duck-sound" src="https://www.myinstants.com/media/sounds/quack.mp3"></audio>
+    <audio id="cartoon-hammer" src="https://www.myinstants.com/media/sounds/cartoon-hammer.mp3"></audio>
     <audio id="aw-sound" src="https://www.myinstants.com/media/sounds/awwsoundheh.mp3"></audio>
     <audio id="rizz-sound" src="https://www.myinstants.com/media/sounds/rizz-sound-effect.mp3"></audio>
     <audio id="fart-sound" src="https://www.myinstants.com/media/sounds/dry-fart.mp3"></audio>
@@ -244,107 +245,69 @@
 
     <script>
         const app = document.getElementById('app');
-        const duckSound = document.getElementById('duck-sound');
+        const cartoonHammerSound = document.getElementById('cartoon-hammer');
         const awSound = document.getElementById('aw-sound');
         const rizzSound = document.getElementById('rizz-sound');
         const fartSound = document.getElementById('fart-sound');
 
         let state = {
             stepIndex: 0,
-            scores: { canard: 0, papa: 0, amis: 0, fart: 0 }
+            scores: { wood: 0, bug: 0, hammer: 0 }
         };
 
         const story = [
             {
-                title: "Benjamin Quest",
-                text: "Benjamin, le système de détection est prêt. Tes choix et ton habilité vont décider de ton cadeau.",
+                title: "Matthew's Gift Quest",
+                text: "Bienvenue Matthew! Pour trouver ton cadeau, tu devras relever des défis et faire des choix. Prêt à commencer ?",
                 options: [{ text: "Démarrer", score: { fart: 1 }, next: true }]
             },
             {
-                title: "Le Flex de 2012",
-                text: "Tu as acheté une TV 4K avant même que la couleur n'existe sur YouTube. Pourquoi ?",
+                title: "Les bases du bricolage",
+                text: "Tu as besoin d'accrocher un cadre au mur. Que fais-tu ?",
                 options: [
-                    { text: "J'aime être le premier et en mettre plein la vue.", score: { amis: 1 }, next: true },
-                    { text: "Pour regarder Peppa Pig en ultra HD avec ta fille", score: { papa: 1 }, next: true }
+                    { text: "J'arrête tout et j'appelle mon beau-frère préféré! Lui il saura quoi faire.", score: { bug: 1 }, next: true },
+                    { text: "Je prends mon fidèle ami à tête dure et je m'y mets.", score: { hammer: 1 }, next: true },
+                    { text: "Je sors la perceuse, les bouts de lambourdes qu'il me reste, la scie circulaire, une échelle, un casque de soudure,.... et je bois une bière!", score: { wood: 1 }, next: true }
                 ]
             },
             {
-                title: "JEU : Lapsus Hunter",
-                text: "CONSIGNE : Clique UNIQUEMENT sur les mots que TU as inventés (les Benjamin-ismes) !",
+                title: "JEU : Wood Hunter",
+                text: "CONSIGNE : Récupère le bois qui tombe du ciel !",
                 type: 'game',
-                gameType: 'lapsus',
+                gameType: 'woodcatch',
                 next: true
             },
             {
-                title: "La Légende du 6",
-                text: "La légende dit que tu as eu plus de 100 conquêtes féminies (et pas que…), mais on sait tous que c'est 6.",
+                title: "Tes reflexes de bricoleur pro",
+                text: "Tu dois enfiler des clous dans un trou de 2mm. Combien de doigts vas-tu taper avant de réussir ?",
                 options: [
-                    { text: "Il y en a que 25 en réalité (j'ai menti…)", score: { amis: -1 }, next: true },
-                    { text: "Vous ne saurez jamais le chiffre ! 🚀", score: { canard: 1 }, next: true },
-                    { text: "J'ai arrêté de compter quand j'ai vu ma femme", score: { canard: 1 }, next: true },
-                    { text: "6️⃣", score: { amis: 1 }, next: true }
+                    { text: "Aucun je suis un pro ", score: { bug: -1 }, next: true },
+                    { text: "Vous ne saurez jamais le chiffre ! 🚀", score: { wood: 1 }, next: true },
+                    { text: "Enfiler des quoi ?", score: { hammer: 1 }, next: true }
                 ]
             },
             {
-                title: "JEU : Reflexe de Don Juan",
-                text: "CONSIGNE : Attrape 15 cœurs ❤️, mais évite les bagues 💍 !",
+                title: "JEU : Reflexe du bricoleur pro",
+                text: "CONSIGNE : Des vers tentent de s'attaquer à ton précieux bois écrase les avant qu'il soit pourri !",
                 type: 'game',
-                gameType: 'conquest',
+                gameType: 'bugwhack',
                 next: true
             },
             {
-                title: "Physique des fluides",
-                text: "Tu renverses ton verre à chaque repas. Pourquoi cette malédiction ?",
+                title: "Et les protections dans tout ça?",
+                text: "Tu bricoles d'accord, mais portes tu les protections nécessaires ?",
                 options: [
-                    { text: "C'est un bug hardware dans mes mains", score: { amis: 1 }, next: true },
-                    { text: "Ma fille a bougé la table", score: { papa: 1 }, next: true }
+                    { text: "Evidemment! Tu sais dans mon dernier job j'étais chargé de la sécurité de toute la commune de Conthey !", score: { hammer: 1 }, next: true },
+                    { text: "Le bon bricoleur il prend son marteau et il frappe. Le mauvais bricoleur il prend son marteau et il frappe, mais c'est pas pareil !", score: { bug: 1 }, next: true },
+                    { text: "Les protections c'est pour les faibles !", score: { wood: 1 }, next: true }
                 ]
             },
             {
-                title: "JEU : Sauve le verre",
-                text: "CONSIGNE : Clique sur le verre pour le maintenir en équilibre et en l'air !",
+                title: "JEU : Sauve ton pied !",
+                text: "CONSIGNE : Clique sur le marteau pour le maintenir en équilibre et en l'air et éviter qu'il n'écrase ton pied !",
                 type: 'game',
-                gameType: 'glass',
+                gameType: 'hammerclick',
                 next: true
-            },
-            {
-                title: "L'avion",
-                text: "Ta femme veut partir à Dubaï, tes amis à Lloret. Tu réserves quoi ?",
-                options: [
-                    { text: "Le vol Easyfly pour Lloret", score: { amis: 1 }, next: true },
-                    { text: "💸💸 Dubaï baby", score: { canard: 1 }, next: true }
-                ]
-            },
-            {
-                title: "EASYFLY SIMULATOR",
-                text: "Pilote ton avion Easyfly vers Lloret ! Évite les nuages qui aveuglent. Prend les fusées qui donnent de l'énergie !",
-                type: 'game',
-                gameType: 'easyfly',
-                next: true
-            },
-            {
-                title: "Maladresse",
-                text: "Du vin rouge sur le tapis blanc. Ton premier réflexe ?",
-                options: [
-                    { text: "Je pose le chat dessus pour cacher la tache.", score: { amis: 1 }, next: true },
-                    { text: "Je frotte avant qu'elle rentre.", score: { canard: 1 }, next: true },
-                    { text: "J'en commande un nouveau en express.", score: { canard: 1 }, next: true }
-                ]
-            },
-            {
-                title: "Nettoye !",
-                text: "Tu as encore renversé ton vin ! Nettoie tout avant que ta femme rentre. Le chat peut t'aider !",
-                type: 'game',
-                gameType: 'cleaning',
-                next: true
-            },
-            {
-                title: "Le Câlin Crapuleux",
-                text: "C'est l'heure de la réconciliation conjugale. Quelle est ton approche ?",
-                options: [
-                    { text: "On est jamais mieux servi que par soi-même.", score: { amis: 1 }, next: true },
-                    { text: "Je fais le ménage à torse nu en espérant un miracle.", score: { canard: 2 }, next: true }
-                ]
             },
             {
                 title: "L'Analyse Finale",
@@ -360,9 +323,9 @@
             app.innerHTML = `
             <div class="card">
                 <div class="score-box">
-                    <span style="color:var(--canard)">🦆 Canard: ${state.scores.canard}</span>
-                    <span style="color:var(--papa)">👶 Papa: ${state.scores.papa}</span>
-                    <span style="color:var(--amis)">🍻 Amis: ${state.scores.amis}</span>
+                    <span style="color:var(--wood)">🪵 Wood: ${state.scores.wood}</span>
+                    <span style="color:var(--bug)">🐛 Bug Hunter: ${state.scores.bug}</span>
+                    <span style="color:var(--hammer)">🔨 Safety: ${state.scores.hammer}</span>
                 </div>
                 <h1>${node.title}</h1>
                 <p>${node.text}</p>
@@ -379,10 +342,9 @@
 
         window.handleChoice = (score) => {
             if (score) {
-                if (score.canard) duckSound.play();
-                if (score.amis) rizzSound.play();
-                if (score.papa) awSound.play();
-                if (score.fart) fartSound.play();
+                if (score.wood) rizzSound.play();
+                if (score.bug) awSound.play();
+                if (score.hammer) cartoonHammerSound.play();
                 for (let key in score) state.scores[key] += score[key];
             }
             state.stepIndex++;
@@ -421,332 +383,190 @@
                 pBar.style.width = (current / total * 100) + '%';
             };
 
-            if (type === 'easyfly') {
-                zone.innerHTML += `<div id="plane" style="position:absolute; left:20px; top:180px; font-size:2.5rem; transition: top 0.05s linear; z-index:10;">✈️</div>`;
-                const plane = document.getElementById('plane');
-
-                let planeTop = 180;
-                let velocity = 0;
-                let score = 0;
-                let obstacles = [];
-                const gravity = 0.5;
-                const lift = -8;
-
-                // Entrée utilisateur
-                zone.onclick = (e) => {
-                    e.preventDefault();
-                    velocity = lift;
-                };
-
-                const gameOver = (message, stats) => {
-                    clearInterval(gameLoop);
-                    obstacles.forEach(obs => obs.el.remove());
-                    showEndGameMenu(message, stats, type);
-                };
-
-                const gameLoop = setInterval(() => {
-                    // 1. Physique de l'avion
-                    velocity += gravity;
-                    planeTop += velocity;
-                    plane.style.top = planeTop + 'px';
-
-                    // 2. Spawn des obstacles
-                    if (Math.random() > 0.93) {
-                        const isDubai = Math.random() > 0.6;
-                        const el = document.createElement('div');
-                        el.innerHTML = isDubai ? '☁️<br>☁️' : '🚀';
-                        el.style.cssText = `position:absolute; left:100%; top:${Math.random() * 80}%; color:white; font-weight:bold; font-size:1.5rem; white-space:nowrap;`;
-                        zone.appendChild(el);
-                        obstacles.push({ el, x: zone.offsetWidth, isDubai });
-                    }
-
-                    // 3. Animation et Collision
-                    obstacles.forEach((obs, index) => {
-                        obs.x -= 6; // Vitesse de défilement
-                        obs.el.style.left = obs.x + 'px';
-
-                        // Détection de collision (BoundingBox simplifiée)
-                        const pRect = plane.getBoundingClientRect();
-                        const oRect = obs.el.getBoundingClientRect();
-
-                        if (!(pRect.right < oRect.left || pRect.left > oRect.right || pRect.bottom < oRect.top || pRect.top > oRect.bottom)) {
-                            if (obs.isDubai) {
-                                duckSound.play();
-                                gameOver("Mince les nuages ! Direction Dubaï", { canard: 2 });
-                            } else {
-                                rizzSound.play();
-                                score++;
-                                gScore.innerText = score;
-                                obs.el.remove();
-                                obstacles.splice(index, 1);
-                            }
-                        }
-
-                        // Nettoyage hors écran
-                        if (obs.x < -50) {
-                            obs.el.remove();
-                            obstacles.splice(index, 1);
-                        }
-                    });
-
-                    // 4. Conditions de fin
-                    if (planeTop > zone.offsetHeight || planeTop < 0) {
-                        gameOver("CRASH !", { amis: 0 });
-                    }
-
-                    if (score >= 5) {
-                        gameOver("BIENVENUE À LLORET !", { amis: 0 });
-                    }
-                }, 30);
-            }
-
-            if (type === 'cleaning') {
-                let cleaned = 0;
-                let goal = 15;
-
-                // On stocke les timers pour pouvoir les stopper proprement
-                let stainInterval;
-                let catInterval;
-                let gameTimeout;
-
-                const stopAllTimers = () => {
-                    clearInterval(stainInterval);
-                    clearInterval(catInterval);
-                    clearTimeout(gameTimeout);
-                };
-
-                const updateBar = () => {
-                    // On calcule le pourcentage sans dépasser 100%
-                    const progress = (cleaned / goal) * 100;
-                    pBar.style.width = Math.min(progress, 100) + '%';
-                };
-
-                const spawnStain = () => {
-                    if (!document.getElementById('game-zone')) return;
-
-                    // --- TA LOGIQUE : Plus il y a de taches, plus le goal augmente ---
-                    goal += 1; // Chaque nouvelle tache ajoute 1 au score requis
-                    updateBar();
-
-                    const stain = document.createElement('div');
-                    stain.className = 'stain';
-                    stain.style.left = Math.random() * 85 + '%';
-                    stain.style.top = Math.random() * 85 + '%';
-
-                    stain.onclick = () => {
-                        stain.remove();
-                        cleaned += 1;
-                        updateBar();
-
-                        if (cleaned >= goal) {
-                            stopAllTimers();
-                            showEndGameMenu("PROPRE ! NI VU NI CONNU", { canard: 1 }, type);
-                        }
-                    };
-                    zone.appendChild(stain);
-                };
-
-                const spawnCat = () => {
-                    const cat = document.createElement('div');
-                    cat.className = 'cat-bonus';
-                    cat.innerText = '🐈';
-                    cat.style.left = '-50px';
-                    cat.style.top = Math.random() * 80 + '%';
-                    zone.appendChild(cat);
-
-                    let pos = -50;
-                    const catMove = setInterval(() => {
-                        pos += 2;
-                        cat.style.left = pos + 'px';
-                        if (pos > 600) { clearInterval(catMove); cat.remove(); }
-                    }, 20);
-
-                    cat.onclick = () => {
-                        fartSound.play();
-                        cleaned += 3; // Le chat donne un plus gros bonus pour compenser le goal qui monte
-                        updateBar();
-                        cat.remove();
-
-                        if (cleaned >= goal) {
-                            stopAllTimers();
-                            showEndGameMenu("PROPRE ! NI VU NI CONNU", { canard: 1 }, type);
-                        }
-                    };
-                };
-
-                // Lancement des boucles
-                stainInterval = setInterval(spawnStain, 350);
-                catInterval = setInterval(spawnCat, 3000);
-
-                // Fin du temps imparti
-                gameTimeout = setTimeout(() => {
-                    if (cleaned < goal) {
-                        stopAllTimers();
-                        fartSound.play();
-                        showEndGameMenu("ELLE EST RENTRÉE... OUPS", { canard: 1 }, type);
-                    }
-                }, 15000);
-            }
-
-            if (type === 'lapsus') {
-                const list = ["Easyfly", "Nickelpark", "6️⃣", "SwissAir", "Easyjet", "Nickelback"];
+            if (type === 'woodcatch') {
+                zone.innerHTML += `<div id="basket" style="position:absolute; bottom:20px; left:50%; transform:translateX(-50%); font-size:3rem; transition: left 0.1s; user-select:none;">🧺</div>`;
+                const basket = document.getElementById('basket');
+                let basketPos = 50; // percentage
                 let caught = 0;
-                const goal = 6;
-                const interval = setInterval(() => {
-                    if (!document.getElementById('game-zone')) return clearInterval(interval);
-                    const word = list[Math.floor(Math.random() * list.length)];
-                    const isCorrect = ["Easyfly", "Nickelpark", "6️⃣"].includes(word);
-                    const el = document.createElement('div');
-                    el.className = 'lapsus';
-                    el.innerText = word;
-                    el.style.left = Math.random() * 60 + 10 + '%';
-                    el.style.top = Math.random() * 70 + 10 + '%';
-                    zone.appendChild(el);
+                let missed = 0;
+                const goal = 15;
+                const maxMissed = 5;
 
-                    el.onclick = () => {
-                        if (isCorrect) {
-                            rizzSound.play();
-                            caught++;
-                            updateProgress(caught, goal);
-                            el.remove();
-                            if (caught >= goal) {
-                                clearInterval(interval);
-                                showEndGameMenu("BIEN JOUÉ !", { amis: 0 }, type);
+                // Mouse control
+                zone.onmousemove = (e) => {
+                    const rect = zone.getBoundingClientRect();
+                    basketPos = ((e.clientX - rect.left) / rect.width) * 100;
+                    basketPos = Math.max(5, Math.min(95, basketPos));
+                    basket.style.left = basketPos + '%';
+                };
+
+                const spawnWood = () => {
+                    if (!document.getElementById('game-zone')) return;
+                    const wood = document.createElement('div');
+                    wood.innerHTML = '🪵';
+                    wood.style.cssText = `position:absolute; left:${Math.random() * 90}%; top:-50px; font-size:2rem; user-select:none;`;
+                    zone.appendChild(wood);
+
+                    let woodY = -50;
+                    let woodX = parseFloat(wood.style.left);
+                    const fallInterval = setInterval(() => {
+                        woodY += 5;
+                        wood.style.top = woodY + 'px';
+
+                        // Check collision with basket
+                        if (woodY > zone.offsetHeight - 80 && woodY < zone.offsetHeight - 40) {
+                            if (Math.abs(woodX - basketPos) < 8) {
+                                clearInterval(fallInterval);
+                                wood.remove();
+                                caught++;
+                                rizzSound.play();
+                                gScore.innerText = caught;
+                                updateProgress(caught, goal);
+
+                                if (caught >= goal) {
+                                    zone.onmousemove = null;
+                                    showEndGameMenu("ALL WOOD CAUGHT! 🪵", { wood: 2 }, type);
+                                }
                             }
-                        } else {
-                            fartSound.play();
-                            el.classList.add('shake');
-                            el.style.background = '#ef4444';
-                            setTimeout(() => el.remove(), 300);
                         }
-                    };
-                    setTimeout(() => { if (el && el.parentNode) el.remove(); }, 2000);
+
+                        // Missed the basket
+                        if (woodY > zone.offsetHeight) {
+                            clearInterval(fallInterval);
+                            wood.remove();
+                            missed++;
+                            fartSound.play();
+                            if (missed >= maxMissed) {
+                                zone.onmousemove = null;
+                                showEndGameMenu("TOO MUCH WASTED WOOD!", { wood: 0 }, type);
+                            }
+                        }
+                    }, 30);
+                };
+
+                const spawnLoop = setInterval(() => {
+                    if (!document.getElementById('game-zone')) clearInterval(spawnLoop);
+                    spawnWood();
                 }, 800);
             }
 
-            if (type === 'glass') {
-                // Paramètres de physique ajustés pour plus de fluidité
-                let posY = 150, tilt = 0, fallSpeed = 0.5, tiltSpeed = 0;
+            if (type === 'bugwhack') {
+                zone.innerHTML += `<div style="position:absolute; inset:0; background:url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22><rect fill=%22%23654321%22 width=%22100%22 height=%22100%22/></svg>') center/80% no-repeat;"></div>`;
+                let whacked = 0;
+                const goal = 20;
+                let spawnRate = 800;
 
-                zone.innerHTML += `
-                    <div id="glass-container" style="position:absolute; left:35%; top:150px; width:120px; height:120px; cursor:pointer; display:flex; justify-content:center; align-items:center; font-size:5rem; user-select:none; transition: transform 0.1s ease-out; border-radius:15px;">🍷</div>
-                    <div style="position:absolute; bottom:45px; width:100%; text-align:center; color:var(--accent); font-size:0.8rem; font-weight:bold; opacity:0.8;">MILIEU = MONTER | BORDS = REDRESSER</div>
-                    <div id="tilt-guide" style="position:absolute; bottom:20px; left:25%; width:50%; height:8px; background:#334155; border-radius:4px;">
-                        <div id="tilt-cursor" style="position:absolute; left:50%; top:-5px; width:15px; height:18px; background:var(--accent); border-radius:2px; transform:translateX(-50%);"></div>
-                    </div>
-                `;
-
-                const glass = document.getElementById('glass-container');
-                const cursor = document.getElementById('tilt-cursor');
-
-                const loop = setInterval(() => {
-                    if (!document.getElementById('game-zone')) return clearInterval(loop);
-
-                    fallSpeed += 0.005;
-                    posY += fallSpeed;
-                    tiltSpeed += (Math.random() - 0.5) * 0.5; // Oscillation naturelle
-                    tilt += tiltSpeed;
-
-                    glass.style.top = posY + 'px';
-                    glass.style.transform = `rotate(${tilt}deg)`;
-                    cursor.style.left = Math.min(Math.max(50 + (tilt * 1.5), 0), 100) + '%';
-
-                    // Feedback visuel si le verre va tomber
-                    if (Math.abs(tilt) > 45) {
-                        glass.style.filter = 'drop-shadow(0 0 15px #ef4444)';
-                    } else {
-                        glass.style.filter = 'none';
-                    }
-
-                    // Conditions de défaite
-                    if (posY > 330 || Math.abs(tilt) > 80) {
-                        clearInterval(loop);
-                        fartSound.play();
-                        showEndGameMenu("TROP TARD, C'EST TACHÉ !", { papa: 1 }, type);
-                    }
-                    // Condition de victoire (toucher le haut)
-                    if (posY < -10) {
-                        clearInterval(loop);
-                        rizzSound.play();
-                        showEndGameMenu("ÉQUILIBRISTE ! 🏆", { papa: 1 }, type);
-                    }
-                }, 40);
-
-                glass.onclick = (e) => {
-                    const rect = glass.getBoundingClientRect();
-                    const clickX = e.clientX - rect.left;
-                    const ratio = clickX / rect.width; // Position entre 0 (gauche) et 1 (droite)
-
-                    posY -= 55; // Propulse le verre vers le haut
-
-                    if (ratio > 0.35 && ratio < 0.65) {
-                        // Clic au centre : on stabilise fortement l'inclinaison
-                        tiltSpeed *= 0.2;
-                        tilt *= 0.8;
-                    } else if (ratio <= 0.35) {
-                        // Clic à gauche : on redresse vers la droite
-                        tiltSpeed += 0.5;
-                    } else {
-                        // Clic à droite : on redresse vers la gauche
-                        tiltSpeed -= 0.5;
-                    }
-                };
-            }
-
-            if (type === 'conquest') {
-                let count = 0, goal = 15;
-                const spawnItem = () => {
+                const spawnBug = () => {
                     if (!document.getElementById('game-zone')) return;
-                    const isRing = Math.random() > 0.7;
-                    const item = document.createElement('div');
-                    item.className = 'floating-icon';
-                    item.innerHTML = isRing ? '💍' : '❤️';
-                    item.style.left = (Math.random() * 80 + 5) + '%';
-                    zone.appendChild(item);
-                    let pY = -50;
-                    const itLoop = setInterval(() => {
-                        pY += 4 + (count * 0.2);
-                        item.style.top = pY + 'px';
-                        if (pY > 400) { clearInterval(itLoop); item.remove(); }
-                    }, 20);
+                    const bug = document.createElement('div');
+                    bug.innerHTML = '🐛';
+                    bug.style.cssText = `position:absolute; left:${Math.random() * 85}%; top:${Math.random() * 85}%; font-size:2.5rem; cursor:pointer; user-select:none; animation: popIn 0.3s;`;
+                    zone.appendChild(bug);
 
-                    item.onclick = () => {
-                        if (isRing) {
-                            clearTimeout(mainLoop);
-                            duckSound.play();
-                            showEndGameMenu("MARIÉ TROP TÔT !", { canard: 2 }, type);
-                        } else {
-                            rizzSound.play();
-                            count++;
-                            updateProgress(count, goal);
-                            item.remove();
-                            if (count >= goal) {
-                                clearTimeout(mainLoop);
-                                showEndGameMenu("LÉGENDE !", { amis: 0 }, type);
-                            }
+                    const bugLife = setTimeout(() => {
+                        if (bug.parentNode) {
+                            bug.remove();
+                        }
+                    }, 1500 - (whacked * 30)); // Bugs disappear faster as you progress
+
+                    bug.onclick = () => {
+                        clearTimeout(bugLife);
+                        bug.innerHTML = '💥';
+                        awSound.play();
+                        whacked++;
+                        gScore.innerText = whacked;
+                        updateProgress(whacked, goal);
+                        setTimeout(() => bug.remove(), 200);
+
+                        if (whacked >= goal) {
+                            clearInterval(gameLoop);
+                            showEndGameMenu("ALL BUGS EXTERMINATED! 🔨", { bug: 2 }, type);
+                        }
+
+                        // Increase difficulty
+                        if (whacked % 5 === 0 && spawnRate > 300) {
+                            spawnRate -= 100;
                         }
                     };
                 };
-                let mainLoop;
-                const gameTick = () => {
-                    spawnItem();
-                    mainLoop = setTimeout(gameTick, Math.max(300, 800 - (count * 30)));
-                };
-                gameTick();
+
+                let gameLoop = setInterval(() => {
+                    spawnBug();
+                }, spawnRate);
+
+                // Spawn initial bugs
+                for (let i = 0; i < 3; i++) {
+                    setTimeout(spawnBug, i * 300);
+                }
             }
+
+            if (type === 'hammerclick') {
+                zone.innerHTML += `
+                    <div id="foot" style="position:absolute; bottom:20px; left:50%; transform:translateX(-50%); font-size:4rem; user-select:none;">🦶</div>
+                    <div id="hammer-fall" style="position:absolute; left:50%; top:50px; transform:translateX(-50%); font-size:3.5rem; cursor:pointer; user-select:none; transition: top 0.05s linear;">🔨</div>
+                    <div style="position:absolute; top:10px; left:50%; transform:translateX(-50%); color:var(--accent); font-weight:bold; font-size:0.9rem;">CLICK TO LIFT!</div>
+                `;
+
+                const hammer = document.getElementById('hammer-fall');
+                let hammerY = 50;
+                let fallSpeed = 1;
+                let clicks = 0;
+                const clickGoal = 50;
+
+                const gameLoop = setInterval(() => {
+                    if (!document.getElementById('game-zone')) return clearInterval(gameLoop);
+
+                    fallSpeed += 0.05;
+                    hammerY += fallSpeed;
+                    hammer.style.top = hammerY + 'px';
+
+                    gScore.innerText = clicks;
+                    updateProgress(clicks, clickGoal);
+
+                    // Victory - hammer reaches top
+                    if (hammerY < -20) {
+                        clearInterval(gameLoop);
+                        cartoonHammerSound.play();
+                        showEndGameMenu("HAMMER SAVED! YOUR TOES ARE SAFE! 🎉", { hammer: 2 }, type);
+                    }
+
+                    // Defeat - hammer hits foot
+                    if (hammerY > 280) {
+                        clearInterval(gameLoop);
+                        fartSound.play();
+                        showEndGameMenu("OUCH! THAT'S GONNA HURT! 🤕", { hammer: 0 }, type);
+                    }
+                }, 30);
+
+                hammer.onclick = () => {
+                    hammerY -= 25;
+                    clicks++;
+                    rizzSound.play();
+
+                    if (clicks >= clickGoal && hammerY > 0) {
+                        clearInterval(gameLoop);
+                        cartoonHammerSound.play();
+                        showEndGameMenu("HAMMER MASTER! 🔨", { hammer: 2 }, type);
+                    }
+                };
+            }
+
+
+
         };
+
 
         function renderResult() {
             const s = state.scores;
             let title, gift;
-            if (s.canard > s.amis && s.canard > s.papa) {
-                title = "LE CANARD D'OR 🦆"; gift = "Un bon ciné pour un moment en amoureux... mais tu fais le taxi.";
-            } else if (s.papa > s.amis) {
-                title = "SUPER PAPA 👶"; gift = "Une soirée cinéma avec ta fille (tu choisis pas le film).";
+            if (s.wood > s.bug && s.wood > s.hammer) {
+                title = "THE MASTER CRAFTSMAN 🪵"; gift = "A professional workshop organizer... because we know you need it!";
+            } else if (s.hammer > s.bug) {
+                title = "SAFETY CHAMPION 🔨"; gift = "A deluxe first-aid kit for all those 'minor' workshop accidents!";
             } else {
-                title = "LA LÉGENDE DE SION 🕺"; gift = "Une soirée ciné pour toi sans couvre-feu.";
+                title = "THE EXTERMINATOR 🐛"; gift = "A year's supply of bug spray for your lumber collection!";
             }
-            app.innerHTML = `<div class="card"><h1>${title}</h1><p>Canard ${s.canard} | Papa ${s.papa} | Amis ${s.amis}</p><button onclick="alert('Ton cadeau : ' + '${gift}')">Ouvrir mon cadeau</button></div>`;
+            app.innerHTML = `<div class="card"><h1>${title}</h1><p>Wood ${s.wood} | Bug Hunter ${s.bug} | Safety ${s.hammer}</p><button onclick="alert('Your gift: ' + '${gift}')">Open My Gift!</button></div>`;
         }
 
         render();
