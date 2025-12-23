@@ -468,7 +468,7 @@
                 let basketPos = 50; // percentage
                 let caught = 0;
                 let missed = 0;
-                const goal = 15;
+                const goal = 10;
                 const maxMissed = 5;
                 let gameActive = true;
 
@@ -621,7 +621,7 @@
                 let hammerY = 50;
                 let fallSpeed = 0.5;
                 let clicks = 0;
-                const clickGoal = 2;
+                const clickGoal = 30;
 
                 const gameLoop = setInterval(() => {
                     if (!document.getElementById('game-zone')) return clearInterval(gameLoop);
@@ -697,9 +697,9 @@
                             healthDisplay.innerText = rockHealth;
                             
                             // Visual feedback
-                            rockElement.style.transform = 'translate(-50%, -50%) scale(0.9)';
+                            rockElement.style.transform = 'scale(0.9)';
                             setTimeout(() => {
-                                rockElement.style.transform = 'translate(-50%, -50%) scale(1)';
+                                rockElement.style.transform = 'scale(1)';
                             }, 100);
 
                             // Sound effect
