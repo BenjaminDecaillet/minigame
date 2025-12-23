@@ -283,6 +283,8 @@
     <audio id="pewpew" src="https://www.myinstants.com/media/sounds/pew_pew-dknight556-1379997159.mp3"></audio>
     <audio id="ouch" src="https://www.myinstants.com/media/sounds/ouch-that-hurt.mp3"></audio>
     <audio id="marioJump" src="https://www.myinstants.com/media/sounds/maro-jump-sound-effect_1.mp3"></audio>
+    <audio id="bricoleur-sound" src="https://www.myinstants.com/media/sounds/angle-grinder.mp3"></audio>
+    <audio id="security" src="https://www.myinstants.com/media/sounds/what-a-good-boy.mp3"></audio>
 
     <div id="app"></div>
 
@@ -296,6 +298,8 @@
         const fartSound = document.getElementById('fart-sound');
         const ouch = document.getElementById('ouch');
         const mario_jump = document.getElementById('marioJump'); 
+        const bricoleur = document.getElementById('bricoleur-sound');
+        const security = document.getElementById('security');
 
         let state = {
             stepIndex: 0,
@@ -328,9 +332,9 @@
                 title: "Tes reflexes de bricoleur pro",
                 text: "Tu dois enfiler des clous dans un trou de 2mm. Combien de doigts vas-tu taper avant de réussir ?",
                 options: [
-                    { text: "Aucun je suis un pro ", score: { gaffeur: -1 }, next: true },
-                    { text: "Vous ne saurez jamais le chiffre ! 🚀", score: { security: 1 }, next: true },
-                    { text: "Enfiler des quoi ?", score: { bricoleur: 1 }, next: true }
+                    { text: "Aucun je suis un pro ", score: { bricoleur: 1 }, next: true },
+                    { text: "Est-ce que la zone de travail est conforme aux normes de sécurité en vigueur? ", score: { security: 1 }, next: true },
+                    { text: "Enfiler des quoi ?", score: { gaffeur: 1 }, next: true }
                 ]
             },
             {
@@ -351,9 +355,9 @@
                 title: "Et les protections dans tout ça?",
                 text: "Tu bricoles d'accord, mais portes tu les protections nécessaires ?",
                 options: [
-                    { text: "Evidemment! Tu sais dans mon dernier job j'étais chargé de la sécurité de toute la commune de Conthey !", score: { hammer: 1 }, next: true },
-                    { text: "Le bon bricoleur il prend son marteau et il frappe. Le mauvais bricoleur il prend son marteau et il frappe, mais c'est pas pareil !", score: { gaffeur: 1 }, next: true },
-                    { text: "Les protections c'est pour les faibles !", score: { security: 1 }, next: true }
+                    { text: "Evidemment! Tu sais dans mon dernier job j'étais chargé de la sécurité de toute la commune de Conthey !", score: { security: 1 }, next: true },
+                    { text: "Le bon bricoleur il prend son marteau et il frappe. Le mauvais bricoleur il prend son marteau et il frappe, mais c'est pas pareil !", score: { bricoleur: 1 }, next: true },
+                    { text: "Les protections c'est pour les faibles !", score: { gaffeur: 1 }, next: true }
                 ]
             },
             {
@@ -403,9 +407,9 @@
 
         window.handleChoice = (score) => {
             if (score) {
-                if (score.security) rizzSound.play();
-                if (score.gaffeur) awSound.play();
-                if (score.hammer) cartoonHammerSound.play();
+                if (score.security) security.play();
+                if (score.gaffeur) ouch.play();
+                if (score.bricoleur) bricoleur.play();
                 for (let key in score) state.scores[key] += score[key];
             }
             state.stepIndex++;
@@ -481,7 +485,7 @@
                                 clearInterval(fallInterval);
                                 wood.remove();
                                 caught++;
-                                rizzSound.play();
+                                // rizzSound.play();
                                 gScore.innerText = caught;
                                 updateProgress(caught, goal);
 
