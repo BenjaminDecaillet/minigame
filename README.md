@@ -10,6 +10,6 @@ To play the game open the `index.html` file in your web browser. Enjoy!
 
 It is also hosted on this project's GitHub Pages:
 
-[![Play Now](https://img.shields.io/badge/Play%20Now-Click%20Here-brightgreen?style=for-the-badge)](https://BenjaminDecaillet.github.io/minigame/)
+[![Play Now](https://img.shields.io/badge/Play%20Now-Click%20Here-brightgreen?style=flat)](https://BenjaminDecaillet.github.io/minigame/)
 
 [https://BenjaminDecaillet.github.io/minigame/](https://BenjaminDecaillet.github.io/minigame/)

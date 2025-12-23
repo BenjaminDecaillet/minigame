@@ -19,25 +19,27 @@
 
         body {
             margin: 0;
-            padding: 0;
+            padding: 10px;
             font-family: 'Poppins', sans-serif;
             background-color: var(--bg);
             color: var(--text);
             display: flex;
             justify-content: center;
-            align-items: center;
-            height: 100vh;
-            overflow: hidden;
+            align-items: flex-start;
+            min-height: 100vh;
+            overflow-y: auto;
+            overflow-x: hidden;
         }
 
         #app {
             width: 95%;
             max-width: 600px;
+            margin: 20px auto;
         }
 
         .card {
             background: var(--card);
-            padding: 2.5rem;
+            padding: 1.5rem;
             border-radius: 2rem;
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -45,11 +47,23 @@
             animation: fadeIn 0.5s ease-out;
         }
 
+        @media (min-width: 600px) {
+            .card {
+                padding: 2.5rem;
+            }
+        }
+
         h1 {
             font-family: 'Bebas Neue', sans-serif;
-            font-size: 3.5rem;
+            font-size: 2.5rem;
             margin-bottom: 0.5rem;
             color: var(--accent);
+        }
+
+        @media (min-width: 600px) {
+            h1 {
+                font-size: 3.5rem;
+            }
         }
 
         .score-box {
@@ -458,12 +472,30 @@
                 const maxMissed = 5;
                 let gameActive = true;
 
-                // Mouse control
-                zone.onmousemove = (e) => {
+                // Mouse and touch control
+                const moveBasket = (clientX) => {
                     const rect = zone.getBoundingClientRect();
-                    basketPos = ((e.clientX - rect.left) / rect.width) * 100;
+                    basketPos = ((clientX - rect.left) / rect.width) * 100;
                     basketPos = Math.max(5, Math.min(95, basketPos));
                     basket.style.left = basketPos + '%';
+                };
+
+                zone.onmousemove = (e) => {
+                    moveBasket(e.clientX);
+                };
+
+                zone.ontouchmove = (e) => {
+                    e.preventDefault();
+                    if (e.touches.length > 0) {
+                        moveBasket(e.touches[0].clientX);
+                    }
+                };
+
+                zone.ontouchstart = (e) => {
+                    e.preventDefault();
+                    if (e.touches.length > 0) {
+                        moveBasket(e.touches[0].clientX);
+                    }
                 };
 
                 const spawnWood = () => {
@@ -493,6 +525,8 @@
                                     gameActive = false;
                                     clearInterval(spawnLoop);
                                     zone.onmousemove = null;
+                                    zone.ontouchmove = null;
+                                    zone.ontouchstart = null;
                                     showEndGameMenu("ALL WOOD CAUGHT! 🪵", { wood: 2 }, type);
                                 }
                             }
@@ -508,6 +542,8 @@
                                 gameActive = false;
                                 clearInterval(spawnLoop);
                                 zone.onmousemove = null;
+                                zone.ontouchmove = null;
+                                zone.ontouchstart = null;
                                 showEndGameMenu("TOO MUCH WASTED WOOD!", { wood: 0 }, type);
                             }
                         }
