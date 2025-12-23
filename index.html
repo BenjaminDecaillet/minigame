@@ -299,6 +299,7 @@
     <audio id="marioJump" src="https://www.myinstants.com/media/sounds/maro-jump-sound-effect_1.mp3"></audio>
     <audio id="bricoleur-sound" src="https://www.myinstants.com/media/sounds/angle-grinder.mp3"></audio>
     <audio id="security" src="https://www.myinstants.com/media/sounds/what-a-good-boy.mp3"></audio>
+    <audio id="bgm" src="https://www.myinstants.com/media/sounds/2-girls-1-cup-8-bit.mp3" loop></audio>
 
     <div id="app"></div>
 
@@ -314,6 +315,16 @@
         const mario_jump = document.getElementById('marioJump'); 
         const bricoleur = document.getElementById('bricoleur-sound');
         const security = document.getElementById('security');
+        const bgMusic = document.getElementById('bgm');
+
+        // Start background music
+        bgMusic.volume = 0.05;
+        bgMusic.play().catch(() => {
+            // Auto-play might be blocked, try again on first user interaction
+            document.addEventListener('click', () => {
+                bgMusic.play();
+            }, { once: true });
+        });
 
         let state = {
             stepIndex: 0,
